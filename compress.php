@@ -1,4 +1,9 @@
 <?php
+//AUTHOR: Jeroen Grooten
+//DATE: 3-6(June)-2016
+//WEBSITE: http://www.jeroengrooten.nl
+//NAME: ImgComp - Compression file. 
+
 if(isset($_POST['submit'])){
     
     if(count($_FILES['upload']['name']) > 0){
@@ -54,15 +59,6 @@ if(isset($_POST['submit'])){
         
         //Get the file extension to lower. So PNG = png.
         $ext2 = strtolower($ext2);
-
-        //Check the file extension and use the appropriate imagecreatefrom.
-/*        if($ext2 =="png"){ 
-          $img = imagecreatefrompng($target);
-            imagealphablending($img, true); // setting alpha blending on
-            imagesavealpha($img, true); // save alphablending setting (important)
-        } else if($ext2 == "jpg"){ 
-          $img = imagecreatefromjpeg($target);
-        }*/
         
         //Check the file extension and use the appropriate imagecreatefrom.
         switch($ext2){
