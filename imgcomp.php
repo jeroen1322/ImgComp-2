@@ -6,6 +6,10 @@ Author: Jeroen Grooten
 Version: 1.0
 */
 
+//THIS FILE IS FOR WORDPRESS
+//This file will display the plugin form in the WP admin panel.
+//If the script will be used as a standalone script, this file can be removed. 
+
 add_action('admin_menu', 'imgcomp_main_page');
  
 function imgcomp_main_page(){
@@ -29,7 +33,7 @@ echo '
         <p><b>LET OP:</b> is de bestandnaam van de foto goed?</p>
         <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appaltaart.jpg</i> heben.</p>
         
-        <form action="wp-content/plugins/imgcomp/compress.php" enctype="multipart/form-data" method="post">
+        <form action="/wp-content/plugins/ImgComp/compress.php" enctype="multipart/form-data" method="post">
             <div>
                 <p>Selecteer uw foto(s):</p>
                 <input id="upload" name="upload[]" type="file" multiple="multiple" accept="image/*" />
