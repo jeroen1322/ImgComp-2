@@ -1,2 +1,3 @@
-# ImgComp-2
+Alt-H1
+======
 Compress, resize and change DPI.
