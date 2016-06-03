@@ -16,3 +16,6 @@ For example: If you put in an 500 wide and 200 height, the image will apear as 2
 The data will be send to comprimeer.php where it is comprimised and processed. 
 If there are more then one image uploaded and processed, the files will be put in a .zip called "gecomprimeerd.zip" and downloaded automatically. If there is just one image uploaded and processed, that one image will be downloaded directly.
 
+###Issues:
+-Takes a long time to upload multiple files and download them again on a real webserver.
+-Sometimes, on a real webserver, not all files will be processed. PNG or JPG, doesn't matter.
