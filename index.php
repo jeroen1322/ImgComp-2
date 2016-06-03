@@ -9,7 +9,7 @@
         </script>
     </head>
     <body>
-        <h1>Websitefoto's comprimeren</h1>
+        <h1><br>Websitefoto's comprimeren</h1>
         <p><b>LET OP:</b> is de bestandnaam van de foto goed?</p>
         <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appaltaart.jpg</i> heben.</p>
         
