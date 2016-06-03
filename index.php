@@ -1,26 +1,6 @@
-<?php
-/*
-Plugin Name: ImgComp
-Description: Rescale and compress images
-Author: Jeroen Grooten
-Version: 1.0
-*/
-
-//THIS FILE IS FOR WORDPRESS
-//This file will display the plugin form in the WP admin panel.
-//If the script will be used as a standalone script, this file can be removed. 
-
-add_action('admin_menu', 'imgcomp_main_page');
- 
-function imgcomp_main_page(){
-        add_menu_page( 'imgcomp Main Page', 'ImgComp', 'manage_options', 'ImgComp', 'compress_main_page' );
-}
- 
-function compress_main_page(){
-echo '
 <html>
     <head>
-        <title>Comprimeer website fotos</title>
+        <title>Comprimeer website foto's</title>
         <script>
             function showDiv(elem){
                if(elem.value == "ander")
@@ -33,10 +13,10 @@ echo '
         <p><b>LET OP:</b> is de bestandnaam van de foto goed?</p>
         <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appaltaart.jpg</i> heben.</p>
         
-        <form action="/wp-content/plugins/ImgComp/compress.php" enctype="multipart/form-data" method="post">
+        <form action="compress.php" enctype="multipart/form-data" method="post">
             <div>
                 <p>Selecteer uw foto(s):</p>
-                <input id="upload" name="upload[]" type="file" multiple="multiple" accept="image/*" />
+                <input id='upload' name="upload[]" type="file" multiple="multiple" accept="image/*" />
                 <p>Selecteer het gewenste foto formaat:</p>
                 <select name="size" onchange="showDiv(this)">
                     <option value="normaal">Normaal</option>
@@ -52,9 +32,4 @@ echo '
             <p><input type="submit" name="submit" value="Verstuur"></p>
         </form>
     </body>
-</html>'
-;
-
-}
- 
-?>
+</html>
