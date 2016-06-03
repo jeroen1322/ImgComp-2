@@ -17,4 +17,4 @@ The data will be send to comprimeer.php where it is comprimised and processed.
 If there are more then one image uploaded and processed, the files will be put in a .zip called "gecomprimeerd.zip" and downloaded automatically. If there is just one image uploaded and processed, that one image will be downloaded directly.
 
 ###Issues:
-- No JPEG support. Will be implemented soon. Now there is only JPG & PNG support.
+- No JPEG support. Now there is only JPG & PNG support. Should be easy fix.
