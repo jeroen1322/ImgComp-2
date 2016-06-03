@@ -7,12 +7,27 @@
                   document.getElementById("hidden_div").style.display = "block";
             }
         </script>
+        <style>
+            #letop{
+                max-width: 500px;
+                border: 1px solid grey;
+                 -moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+                -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+                box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+            }
+            #letop p{
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        </style>
     </head>
     <body>
         <h1><br>Websitefoto's comprimeren</h1>
-        <p><b>LET OP:</b> is de bestandnaam van de foto goed?</p>
-        <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appaltaart.jpg</i> heben.</p>
-        
+        <div id="letop">
+            <p><b>LET OP:</b> is de bestandnaam van de foto goed?</p>
+            <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appaltaart.jpg</i> heben.</p>
+        </div>
+            
         <form action="compress.php" enctype="multipart/form-data" method="post">
             <div>
                 <p>Selecteer uw foto's (maximaal 20 stuks):</p>
