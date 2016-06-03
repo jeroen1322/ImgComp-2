@@ -13,27 +13,35 @@ if (isset($_POST['submit'])) {
             $total       = count($_FILES['upload']['tmp_name']);
             $fileTmpLoc  = $_FILES["upload"]["tmp_name"];
             $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
-            
             $fileType = $_FILES['upload']['type'];
-            //Make sure we have a filepath
-            if ($tmpFilePath != "") {
-                
-                //save the filename
-                $shortname = $_FILES['upload']['name'][$i];
-                
-                //save the url and the file
-                $filePath = "uploads/" . $_FILES['upload']['name'][$i];
-                
-                //Upload the file into the temp dir
-                if (move_uploaded_file($tmpFilePath, $filePath)) {
-                    
-                    $files[] = $shortname;
-                    //use $shortname for the filename
-                    //use $filePath for the relative url to the file
-                    
-                }
+            
+            //Check if the uploaded file is actually a image. 
+            //If not, stop the script and display an error. 
+            if (!preg_match("/.(jpg|png)$/i", $_FILES['upload']['name'][$i])){
+                echo "ERROR: Selecteer alstublieft een correct foto bestand.";
+                die();
             } else {
-                echo "ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw.";
+                //Make sure we have a filepath
+                if ($tmpFilePath != "") {
+
+                    //save the filename
+                    $shortname = $_FILES['upload']['name'][$i];
+
+                    //save the url and the file
+                    $filePath = "uploads/" . $_FILES['upload']['name'][$i];
+
+                    //Upload the file into the temp dir
+                    if (move_uploaded_file($tmpFilePath, $filePath)) {
+
+                        $files[] = $shortname;
+                        //use $shortname for the filename
+                        //use $filePath for the relative url to the file
+
+                    }
+                } else {
+                    echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw.";
+                    die();
+                }
             }
         }
     }
@@ -123,7 +131,7 @@ if (isset($_POST['submit'])) {
         $image[17] = chr($dpi_y % 255);
         
         // Write the new JPG
-        $f = fopen($comped, 'w') or die("ERROR: Er is een fout geweest tijdens het verwerken van uw bestand. Probeer het alstublieft opnieuw.");
+        $f = fopen($comped, 'w') or die("<br>ERROR: Er is een fout geweest tijdens het verwerken van uw bestand. Probeer het alstublieft opnieuw.");
         fwrite($f, $image, $size);
         fclose($f);
     }
@@ -146,9 +154,14 @@ if (isset($_POST['submit'])) {
             $h = 2000;
             break;
         
-        case "slider":
+        case "slider": //Slider image
             $w = 1920;
             $h = 3000; //Just a number I chose.
+            break;
+            
+        case "logo": //Logo image
+            $w = 200;
+            $h = 110;
             break;
         
         //If the user selects "anders, namelijk:", the user can put in the height and width themselfes.
@@ -161,7 +174,16 @@ if (isset($_POST['submit'])) {
                 $w = $wijd;
                 $h = $hoog;
             } else {
-                echo "ERROR: Voer alstublieft de hoogte en breedte voor de foto(s) in";
+                echo "<br>ERROR: Voer alstublieft de hoogte en breedte voor de foto's in";
+                
+                //Delete all the files from the uploads/ folder after the download.
+                $del = glob('uploads/*'); //Get all the files from uploads/
+                //Loop through all the files and unlink (delete) them
+                foreach ($del as $d) {
+                    if (is_file($d)) {
+                        unlink($d);
+                    }
+                }
                 exit(0); //Can also use die();
             }
     }
@@ -217,6 +239,7 @@ if (isset($_POST['submit'])) {
     //If there are more than 1 file uploaded and processed, create and put them in a .zip file and download it.
     //After the download the .zip will be deleted.
     //If there is just one file uploaded and processed, use a HTTP request to download that one file.
+    
     if ($total > 1) {
         
         //Defining some vars
