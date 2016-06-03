@@ -169,43 +169,45 @@ if(isset($_POST['submit'])){
     $newcopy = array();
     
     //Loop through all the uploaded files and get the correct filename 
-    foreach($files as $i){
-        
-        $target = "uploads/".$i; //Target will be "uploads/[FILENAME]"
-        
-        //Made multiple arrays from the same var for code clarity 
-        $newcopy[] = $target; 
-        $targetArray[] = $target;
-        
-        //the array $fileExt2 MUST be declared on this loop. 
-        //If it isn't the case, and multible files are uploaded, the content of the .zip will be corrupted.
-        $fileExt2 = array(); 
-        
-        //Get the file extension of every uploaded file.
-        foreach($files as $b){
-            $kaboom = explode(".", $b);
-            $fileExt2[] = end($kaboom);
-        }
-    
-        
-    }
-    
-    //Call the functions to manipulate the images and use the correct vars.
-    //It is a combined array foreach loop because there are 2 arrays that need to be worked with.
-    foreach(array_combine($targetArray, $fileExt2) as $arr => $ext2){
-        //Resize the image(s)
-        ak_img_resize($arr, $w, $h, $ext2);
-        
-        //If the image is a .jpg, change the DPI. PNG does NOT use DPI.
-        //The if statement could be changed to: 
-        //if($ext2 != "png"){}. But this works. 
-        if($ext2 == "jpg"){
-            $dpi_x=72; //The horizontal DPI will be changed to 72
-            $dpi_y=72; //The vertical DPI will be changed to 72
-            setDPI($arr, $dpi_x, $dpi_y);
+    if(isset($files)){//If $files extist, execute the code. This check is to prevent error when no files are uploaded.
+        foreach($files as $i){
+
+            $target = "uploads/".$i; //Target will be "uploads/[FILENAME]"
+
+            //Made multiple arrays from the same var for code clarity 
+            $newcopy[] = $target; 
+            $targetArray[] = $target;
+
+            //the array $fileExt2 MUST be declared on this loop. 
+            //If it isn't the case, and multible files are uploaded, the content of the .zip will be corrupted.
+            $fileExt2 = array(); 
+
+            //Get the file extension of every uploaded file.
+            foreach($files as $b){
+                $kaboom = explode(".", $b);
+                $fileExt2[] = end($kaboom);
+            }
+
+
         }
     }
-    
+    if(isset($fileExt2)){//If $fileExt2 extist, execute the code. This check is to prevent error when no files are uploaded.
+        //Call the functions to manipulate the images and use the correct vars.
+        //It is a combined array foreach loop because there are 2 arrays that need to be worked with.
+        foreach(array_combine($targetArray, $fileExt2) as $arr => $ext2){
+            //Resize the image(s)
+            ak_img_resize($arr, $w, $h, $ext2);
+
+            //If the image is a .jpg, change the DPI. PNG does NOT use DPI.
+            //The if statement could be changed to: 
+            //if($ext2 != "png"){}. But this works. 
+            if($ext2 == "jpg"){
+                $dpi_x=72; //The horizontal DPI will be changed to 72
+                $dpi_y=72; //The vertical DPI will be changed to 72
+                setDPI($arr, $dpi_x, $dpi_y);
+            }
+        }
+    }
 
 
 
@@ -247,12 +249,17 @@ if(isset($_POST['submit'])){
         }
         
     }else{      
-        //If there is just 1 file uploaded, send a HTTP request and download only that file.
-        header('Content-type: octet/stream');
-        header('Content-disposition: attachment; filename='.$shortname.';');
-        header('Content-Length: '.filesize($filePath));
-        readfile($filePath);
-
+        
+        if(isset($filePath)){
+            //If there is just 1 file uploaded, send a HTTP request and download only that file.
+            header('Content-type: octet/stream');
+            header('Content-disposition: attachment; filename='.$shortname.';');
+            header('Content-Length: '.filesize($filePath));
+            readfile($filePath);
+        }else{
+            echo "<br>ERROR: Selecteer alstublieft een foto.";
+        }
+        
         //Delete all the files from the uploads/ folder after the download.
         $del = glob('uploads/*');//Get all the files from uploads/
         //Loop through all the files and unlink (delete) them
@@ -262,6 +269,8 @@ if(isset($_POST['submit'])){
             }
         }     
     }   
+}else{
+    echo "ERROR";
 }
 
 ?>
