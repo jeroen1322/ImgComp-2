@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
             
             //Check if the uploaded file is actually a image. 
             //If not, stop the script and display an error. 
-            if (!preg_match("/.(jpg|png)$/i", $_FILES['upload']['name'][$i])){
+            if (!preg_match("/.(jpg|png|jpeg)$/i", $_FILES['upload']['name'][$i])){
                 echo "ERROR: Selecteer alstublieft een correct foto bestand.";
                 die();
             } else {
@@ -78,6 +78,9 @@ if (isset($_POST['submit'])) {
             case "jpg":
                 $img = imagecreatefromjpeg($target);
                 break;
+            
+            case "jpeg":
+                $img = imagecreatefromjpeg($target);
         }
         
         //Use the new height and width
@@ -94,7 +97,7 @@ if (isset($_POST['submit'])) {
         //Copy the pixels of the original image to the new image
         imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
         
-        if ($ext2 == "jpg") {
+        if ($ext2 == "jpg" or $ext2 == "jpeg") {
             imagejpeg($tci, $newcopy, 60);
         } elseif ($ext2 == "png") {
             imagepng($tci, $newcopy, 8);
@@ -110,6 +113,10 @@ if (isset($_POST['submit'])) {
             case "png":
                 imagepng($tci, $newcopy, 6); //Make the image at 60% of the quality of the original. 
                 //imagepng can use from 0 (no compression) to 9. 
+                break;
+            
+            case "jpeg":
+                imagejpeg($tci, $newcopy, 60);
                 break;
         }
         
@@ -228,7 +235,7 @@ if (isset($_POST['submit'])) {
             //If the image is a .jpg, change the DPI. PNG does NOT use DPI.
             //The if statement could be changed to: 
             //if($ext2 != "png"){}. But this works. 
-            if ($ext2 == "jpg") {
+            if ($ext2 == "jpg" or $ext2 == "jpeg") {
                 $dpi_x = 72; //The horizontal DPI will be changed to 72
                 $dpi_y = 72; //The vertical DPI will be changed to 72
                 setDPI($arr, $dpi_x, $dpi_y);
