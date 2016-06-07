@@ -4,6 +4,7 @@ AUTHOR: Jeroen Grooten
 DATE: 3-6(June)-2016
 WEBSITE: http://www.jeroengrooten.nl
 NAME: ImgComp - Compression file. 
+DESCRIPTION: Processing file that processes the input and downloads the compressed, modified image.
 */
 
 if (isset($_POST['submit'])) {
