@@ -18,3 +18,7 @@ If there are more then one image uploaded and processed, the files will be put i
 
 ###Issues:
 - No JPEG support. Now there is only JPG & PNG support. Should be easy fix. [SOLVED]
+
+###TODO:
+- Change code design to have more oversight.
+- Use [DocBlock](https://www.wikiwand.com/en/PHPDoc) as comment style.
