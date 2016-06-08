@@ -19,30 +19,40 @@ If there are more then one image uploaded and processed, the files will be put i
 #Results: 
 [Normal format]
 
--**Image 1:**
+-**Image 1**:
 
-     ORIGINAL: 5,49 MB (5490 kB) - 4752 x 3169 - 72 DPI - JPEG
+     ORIGINAL: 10,2 MB (10200 kB) - 7202 x 4329 - 300 DPI - JPG
+     MODIFIED: 24 kB (0.024 MB) - 800 x 480 - 72 DPI - JPG
+     
+-**Image 2**: 
+
+     ORIGINAL: 12,5 MB (12500 kB) - 5250 x 3450 - 96 DPI - JPG
+     MODIFIED: 45,5 kB (0,0455 kB) - 800 x 525 - 72 DPI - JPG
+
+-**Image 3:**
+
+     ORIGINAL: 5,49 MB (5490 kB) - 4752 x 3169 - 72 DPI - JPG
      MODIFIED: 94,8 kB (0,0948 MB) - 800 x 533 - 72 DPI - JPG
     
--**Image 2:**
+-**Image 4:**
 
-     ORIGINAL: 3,87 MB (3870 kB) - 4450 x 2887 - 96 DPI - JPEG
+     ORIGINAL: 3,87 MB (3870 kB) - 4450 x 2887 - 96 DPI - JPG
      MODIFIED: 60,0 kB (0,06 MB) - 800 x 519 - 72 DPI - JPG
     
     
--**Image 3:** 
+-**Image 5:** 
 
     ORIGINAL: 700 kB - 1105 x 1501 - PNG
     MODIFIED: 501 kB - 800 x 1086 - PNG
     
--**Image 4:** 
+-**Image 6:** 
 
     ORIGINAL: 901 kB - 3476 x 828 - PNG
     MODIFIED: 156kB - 800 x 190 - PNG
     
--**Image 5:** 
+-**Image 7:** 
 
-    ORIGINAL: 2,71 MB (2710 kB) - 5184 - 3456 - 350 DPI - JPEG
+    ORIGINAL: 2,71 MB (2710 kB) - 5184 - 3456 - 350 DPI - JPG
     MODIFIED: 34,1 kB (0,0341 MB) - 800 x 533 - 72 DPI - JPG
 
 
