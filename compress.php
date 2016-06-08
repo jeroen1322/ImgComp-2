@@ -172,11 +172,6 @@ if (isset($_POST['submit'])) {
             $w = 1920;
             $h = 3000; //Just a number I chose.
             break;
-            
-        case "logo": //Logo image
-            $w = 200;
-            $h = 200;
-            break;
         
         //If the user selects "anders, namelijk:", the user can put in the height and width themselfes.
         case "ander":
