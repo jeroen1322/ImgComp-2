@@ -1,9 +1,11 @@
 <?php
 /*
 Plugin Name: ImgComp
-Description: Compress images, rescale them and change the DPI. 
-Author: Jeroen Grooten
+Plugin URI: http://www.vaneckoosterink.com
+Description: Foto compressie. -Optimaliseer foto's voor uw website
+Author: Jeroen Grooten - Van Eck & Oosterink
 Version: 2.0
+Author URI: http://www.jeroengrooten.nl
 */
 
 //THIS FILE IS FOR WORDPRESS
@@ -22,15 +24,17 @@ echo '
     <head>
         <title>Comprimeer website foto\'s</title>
         <script>
+            
             function showDiv(elem){
                if(elem.value == "ander")
                   document.getElementById("hidden_div").style.display = "block";
             }
+            
         </script>
         <style>
             #letop{
                 max-width: 500px;
-                border: 1px solid grey;
+                border: 1px solid #bbbbbb;
                  -moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
                 -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
                 box-shadow: 1px 2px 3px rgba(0,0,0,.5);
@@ -45,7 +49,7 @@ echo '
         <h1><br>Websitefoto\'s comprimeren</h1>
         <div id="letop">
             <p><b>LET OP:</b> is de bestandnaam van de foto goed?</p>
-            <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appaltaart.jpg</i> heben.</p>
+            <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appeltaart.jpg</i> heben.</p>
         </div>
             
         <form action="/wp-content/plugins/ImgComp/compress.php" enctype="multipart/form-data" method="post">
@@ -54,9 +58,8 @@ echo '
                 <input id="upload" name="upload[]" type="file" multiple="multiple" accept="image/*" />
                 <p>Selecteer het gewenste foto formaat:</p>
                 <select name="size" onchange="showDiv(this)">
-                    <option value="normaal">Normaal</option>
-                    <option value="slider">Slider</option>
-                    <option value="logo">Logo</option>
+                    <option value="normaal">Normaal [800 x 600]</option>
+                    <option value="slider">Slider [1920 x 1080]</option>
                     <option value="ander">Ander, Namelijk:</option>
                 </select>
                 <div id="hidden_div" style="display: none;">
