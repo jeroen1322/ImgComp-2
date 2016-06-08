@@ -20,8 +20,10 @@ If there are more then one image uploaded and processed, the files will be put i
 [Normal format]
 
 -Image 1:
-    ORIGINAL: 5,49 MB (5490 kB) - 4752 x 3169 - 72 DPI - JPEG
-    MODIFIED: 94,8 kB (0,0948 MB) - 800 x 533 - 72 DPI - JPG
+
+     ORIGINAL: 5,49 MB (5490 kB) - 4752 x 3169 - 72 DPI - JPEG
+     
+      MODIFIED: 94,8 kB (0,0948 MB) - 800 x 533 - 72 DPI - JPG
     
 -Image 2: 
     ORIGINAL: 3,87 MB (3870 kB) - 4450 x 2887 - 96 DPI - JPEG
