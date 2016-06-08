@@ -44,8 +44,8 @@ if (isset($_POST['submit'])) {
                         //use $filePath for the relative url to the file
 
                     }
-                } else {
-                    echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw."; //Error message if file uploaded doesn't work.
+                 }else {
+                    echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw."; //Error message if file uploaded, for some reason, doesn't work.
                     die();
                 }
             }
@@ -175,7 +175,7 @@ if (isset($_POST['submit'])) {
             
         case "logo": //Logo image
             $w = 200;
-            $h = 111;
+            $h = 200;
             break;
         
         //If the user selects "anders, namelijk:", the user can put in the height and width themselfes.
