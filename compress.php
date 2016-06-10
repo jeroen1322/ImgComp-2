@@ -34,23 +34,6 @@ if (isset($_POST['submit'])) {
                         $files[] = $shortname;
                         //use $shortname for the filename
                         //use $filePath for the relative url to the file
-                        $short = "uploads/".$shortname;
-                        
-                        $short = getimagesize($short);
-                        
-                        if($short['channels'] == 4){
-                            echo "Uw foto is CMYK (Fullcolor) en wordt niet ondersteund. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.";
-                            //Delete all the files from the uploads/ folder after the download.
-                            $del = glob('uploads/*'); //Get all the files from uploads/
-                            //Loop through all the files and unlink (delete) them
-                            foreach ($del as $d) {
-                                if (is_file($d)) {
-                                    unlink($d);
-                                }
-                            }
-                            die();
-
-                        }
                     }
                 } else {
                     echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw.";
@@ -111,14 +94,17 @@ if (isset($_POST['submit'])) {
         switch ($ext2) {
             case "jpg":
                 
+                //Get file name and image information
                 $short = "uploads/".$shortname;
-
                 $short = getimagesize($short);
 
+                //Check if an image is CMYK. If it is, echo an error, delete uploaded files and die();
                 if($short['channels'] == 4){
-                    echo "Uw foto is een CMYK (Fullcolor) JPG afbeelding en wordt daarom afgewezen. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.";
-                    //Delete all the files from the uploads/ folder after the download.
+                    echo "Uw foto is CMYK (Fullcolor) en wordt niet ondersteund. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.";
+
+                    //Delete all the files from the uploads/ folder
                     $del = glob('uploads/*'); //Get all the files from uploads/
+
                     //Loop through all the files and unlink (delete) them
                     foreach ($del as $d) {
                         if (is_file($d)) {
