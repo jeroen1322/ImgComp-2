@@ -21,7 +21,7 @@
                     <option value="normaal">Normaal</option>
                     <option value="slider">Slider</option>
                     <option value="logo">Logo</option>
-                    <option value="ander">Ander, Namelijk:</option>
+                    <option value="ander">Anders, Namelijk:</option>
                 </select>
                 <div id="hidden_div" style="display: none;">
                     <p>Hoogte: <br>  <input type="input" name="hoogte" placeholder="Hoogte in pixels"></p>
