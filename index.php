@@ -64,7 +64,7 @@
             
         <form action="compress.php" enctype="multipart/form-data" method="post">
             <div>
-                <p>Selecteer uw foto's (maximaal 20 stuks):</p>
+                <p>Selecteer uw foto's (maximaal 20 per keer):</p>
                 <input id="upload" name="upload[]" type="file" multiple="multiple" accept="image/*" />
                 <p>Selecteer het gewenste foto formaat:</p>
                 <select name="size" onchange="showDiv(this)">
