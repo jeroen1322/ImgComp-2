@@ -105,7 +105,7 @@ echo '
             <p><input type="submit" name="submit" value="Verstuur" onclick="myFunction()"></p>
         </form>
         <div id="help">
-            <img src="Images/question-mark.png" />
+            <img src="/wp-content/plugins/ImgComp/Images/question-mark.png" />
             <div id="help_hidden"><p>Het kan enkele minuten duren om het bestand te uploaden, aanpassen en downloaden. Het kan zijn dat de pagina niet veranderd, maar de download start automatisch.</p></div>
         </div>
     </body>
