@@ -1,29 +1,22 @@
 <?php
-/*
-AUTHOR: Jeroen Grooten
-DATE: 3-6(June)-2016
-WEBSITE: http://www.jeroengrooten.nl
-NAME: ImgComp - Compression file. 
-DESCRIPTION: Processing file that processes the input and downloads the compressed, modified image.
-*/
+//AUTHOR: Jeroen Grooten
+//DATE: 3-6(June)-2016
+//WEBSITE: http://www.jeroengrooten.nl
+//NAME: ImgComp - Compression file. 
 
 if (isset($_POST['submit'])) {
-    
     if (count($_FILES['upload']['name']) > 0) {
-        
-        //Loop through each file that is uploaded through the HTML form.
+        //Loop through each file
         for ($i = 0; $i < count($_FILES['upload']['name']); $i++) {
-        
-            $total       = count($_FILES['upload']['tmp_name']); // Get the total amount of uploaded file to determine download method.
-            $fileTmpLoc  = $_FILES["upload"]["tmp_name"]; // Get the temp location of each file.
-            $tmpFilePath = $_FILES['upload']['tmp_name'][$i]; // Get the tmp name of each file.
-            $fileType = $_FILES['upload']['type']; // Get what type of file each uploaded file is.
+            //Get the temp file path
+            $total       = count($_FILES['upload']['tmp_name']);
+            $fileTmpLoc  = $_FILES["upload"]["tmp_name"];
+            $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+            $fileType = $_FILES['upload']['type'];
             
-            /*           
-            Check if the uploaded file is actually a image. 
-            If not, stop the script and display an error. 
-            */
-            if (!preg_match("/.(jpg|png|jpeg)$/i", $_FILES['upload']['name'][$i])){
+            //Check if the uploaded file is actually a image. 
+            //If not, stop the script and display an error. 
+            if (!preg_match("/.(jpg|png)$/i", $_FILES['upload']['name'][$i])){
                 echo "ERROR: Selecteer alstublieft een correct foto bestand.";
                 die();
             } else {
@@ -44,8 +37,8 @@ if (isset($_POST['submit'])) {
                         //use $filePath for the relative url to the file
 
                     }
-                 }else {
-                    echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw."; //Error message if file uploaded, for some reason, doesn't work.
+                } else {
+                    echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw.";
                     die();
                 }
             }
@@ -59,7 +52,7 @@ if (isset($_POST['submit'])) {
         //Get the sizes of the original image(s)
         list($w_orig, $h_orig) = getimagesize($arr);
         
-        //Scale the height with the width, and vice versa. 
+        //Scale the height with the width, and vice versa 
         $scale_ratio = $w_orig / $h_orig;
         if (($w / $h) > $scale_ratio) {
             $w = $h * $scale_ratio;
@@ -84,9 +77,6 @@ if (isset($_POST['submit'])) {
             case "jpg":
                 $img = imagecreatefromjpeg($target);
                 break;
-            
-            case "jpeg":
-                $img = imagecreatefromjpeg($target);
         }
         
         //Use the new height and width
@@ -103,26 +93,16 @@ if (isset($_POST['submit'])) {
         //Copy the pixels of the original image to the new image
         imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
         
-        if ($ext2 == "jpg" or $ext2 == "jpeg") {
-            imagejpeg($tci, $newcopy, 60);
-        } elseif ($ext2 == "png") {
-            imagepng($tci, $newcopy, 8);
-        }
-        
         switch ($ext2) {
             case "jpg":
-                imagejpeg($tci, $newcopy, 60); //Make the image at 60% the quality of the original
+                imagejpeg($tci, $newcopy, 80); //Make the image at 60% the quality of the original
                 //imagejpeg can use from 0 (worst quality) to 100 (best quality).
                 //If the quality option is NOT set, the default will be 75.
                 break;
             
             case "png":
-                imagepng($tci, $newcopy, 6); //Make the image at 60% of the quality of the original. 
+                imagepng($tci, $newcopy, 8); //Make the image at 60% of the quality of the original. 
                 //imagepng can use from 0 (no compression) to 9. 
-                break;
-            
-            case "jpeg":
-                imagejpeg($tci, $newcopy, 60);
                 break;
         }
         
@@ -171,6 +151,11 @@ if (isset($_POST['submit'])) {
         case "slider": //Slider image
             $w = 1920;
             $h = 3000; //Just a number I chose.
+            break;
+            
+        case "logo": //Logo image
+            $w = 200;
+            $h = 111;
             break;
         
         //If the user selects "anders, namelijk:", the user can put in the height and width themselfes.
@@ -236,7 +221,7 @@ if (isset($_POST['submit'])) {
             //If the image is a .jpg, change the DPI. PNG does NOT use DPI.
             //The if statement could be changed to: 
             //if($ext2 != "png"){}. But this works. 
-            if ($ext2 == "jpg" or $ext2 == "jpeg") {
+            if ($ext2 == "jpg") {
                 $dpi_x = 72; //The horizontal DPI will be changed to 72
                 $dpi_y = 72; //The vertical DPI will be changed to 72
                 setDPI($arr, $dpi_x, $dpi_y);
@@ -268,6 +253,7 @@ if (isset($_POST['submit'])) {
         
         $zip->close(); //Close the zip procedure
         
+        
         //Download the .zip file
         header('Content-Type: application/zip');
         header('Content-disposition: attachment; filename=' . $filename);
@@ -287,6 +273,7 @@ if (isset($_POST['submit'])) {
     } else {
         
         if (isset($filePath)) {
+            $shortname = preg_replace('/\s+/', '_', $shortname);
             //If there is just 1 file uploaded, send a HTTP request and download only that file.
             header('Content-type: octet/stream');
             header('Content-disposition: attachment; filename=' . $shortname . ';');
@@ -305,6 +292,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
+    
 } else {
     echo "ERROR";
 }
