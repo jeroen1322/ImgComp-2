@@ -1,60 +1,10 @@
 <html>
     <head>
         <title>Comprimeer website foto's</title>
-        <script>
-            function showDiv(elem){
-               if(elem.value == "ander")
-                  document.getElementById("hidden_div").style.display = "block";
-            }
-        </script>
-        <style>
-            #letop{
-                max-width: 500px;
-                border: 1px solid #bbbbbb;
-                 -moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-                -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-                box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-            }
-            
-            #letop p{
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-            #help img{
-                float: left;
-                height: 20px;
-                width: 20px;
-                margin-top: 10px;
-            }
-            
-            #help_hidden{
-                max-width: 200px;
-                max-height: 200px;
-                margin-top: 10px;
-                margin-left: 50px;
-                display: none;
-                background-color: #DEDEDE;
-                border: 1.5px dashed black;
-                border-radius: 5px;
-            }
-            
-            #help_hidden p{
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-            
-            #help:hover #help_hidden{
-                display: block;
-            }
-            
-        </style>
-        <script>
-        function myFunction() {
-            location.reload();
-        }
-        </script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="js/js.js"></script>
     </head>
+    
     <body>
         <h1><br>Websitefoto's comprimeren</h1>
         <div id="letop">
@@ -87,4 +37,5 @@
             <div id="help_hidden"><p>Het kan enkele minuten duren om het bestand te uploaden, aanpassen en downloaden. Het kan zijn dat de pagina niet veranderd, maar de download start automatisch.</p></div>
         </div>
     </body>
+    
 </html>
