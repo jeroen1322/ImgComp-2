@@ -3,7 +3,6 @@
 //DATE: 3-6(June)-2016
 //WEBSITE: http://www.jeroengrooten.nl
 //NAME: ImgComp - Compression file. 
-
 if (isset($_POST['submit'])) {
     if (count($_FILES['upload']['name']) > 0) {
         //Loop through each file
@@ -35,7 +34,23 @@ if (isset($_POST['submit'])) {
                         $files[] = $shortname;
                         //use $shortname for the filename
                         //use $filePath for the relative url to the file
+                        $short = "uploads/".$shortname;
+                        
+                        $short = getimagesize($short);
+                        
+                        if($short['channels'] == 4){
+                            echo "Uw foto is CMYK (Fullcolor) en wordt niet ondersteund. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.";
+                            //Delete all the files from the uploads/ folder after the download.
+                            $del = glob('uploads/*'); //Get all the files from uploads/
+                            //Loop through all the files and unlink (delete) them
+                            foreach ($del as $d) {
+                                if (is_file($d)) {
+                                    unlink($d);
+                                }
+                            }
+                            die();
 
+                        }
                     }
                 } else {
                     echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw.";
@@ -46,7 +61,7 @@ if (isset($_POST['submit'])) {
     }
     
     //----FUNCTION TO RESIZE THE IMAGES----//
-    function ak_img_resize($arr, $w, $h, $ext2)
+    function ak_img_resize($arr, $w, $h, $ext2, $shortname)
     {
         
         //Get the sizes of the original image(s)
@@ -65,7 +80,7 @@ if (isset($_POST['submit'])) {
         $target  = $arr;
         $newcopy = $arr;
         
-        //Get the file extension to lower. So PNG = png.
+        //Get the file extension to lower. So .PNG = .png.
         $ext2 = strtolower($ext2);
         
         //Check the file extension and use the appropriate imagecreatefrom.
@@ -91,10 +106,29 @@ if (isset($_POST['submit'])) {
         }
         
         //Copy the pixels of the original image to the new image
-        imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
+       imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
         
         switch ($ext2) {
             case "jpg":
+                
+                $short = "uploads/".$shortname;
+
+                $short = getimagesize($short);
+
+                if($short['channels'] == 4){
+                    echo "Uw foto is een CMYK (Fullcolor) JPG afbeelding en wordt daarom afgewezen. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.";
+                    //Delete all the files from the uploads/ folder after the download.
+                    $del = glob('uploads/*'); //Get all the files from uploads/
+                    //Loop through all the files and unlink (delete) them
+                    foreach ($del as $d) {
+                        if (is_file($d)) {
+                            unlink($d);
+                        }
+                    }
+                    die();
+
+                }
+                
                 imagejpeg($tci, $newcopy, 80); //Make the image at 60% the quality of the original
                 //imagejpeg can use from 0 (worst quality) to 100 (best quality).
                 //If the quality option is NOT set, the default will be 75.
@@ -216,12 +250,13 @@ if (isset($_POST['submit'])) {
         //It is a combined array foreach loop because there are 2 arrays that need to be worked with.
         foreach (array_combine($targetArray, $fileExt2) as $arr => $ext2) {
             //Resize the image(s)
-            ak_img_resize($arr, $w, $h, $ext2);
+            ak_img_resize($arr, $w, $h, $ext2, $shortname);
             
             //If the image is a .jpg, change the DPI. PNG does NOT use DPI.
             //The if statement could be changed to: 
             //if($ext2 != "png"){}. But this works. 
-            if ($ext2 == "jpg") {
+            $ext2 = strtolower($ext2);
+            if ($ext2 == "jpg" ) {
                 $dpi_x = 72; //The horizontal DPI will be changed to 72
                 $dpi_y = 72; //The vertical DPI will be changed to 72
                 setDPI($arr, $dpi_x, $dpi_y);
