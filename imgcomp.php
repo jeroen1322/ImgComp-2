@@ -34,7 +34,7 @@ echo '
             <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appaltaart.jpg</i> heben.</p>
         </div>
             
-        <form action="compress.php" enctype="multipart/form-data" method="post">
+        <form action="/wp-content/plugins/ImgComp/compress.php" enctype="multipart/form-data" method="post">
             <div>
                 <p>Selecteer uw foto\'s (maximaal 20 per keer):</p>
                 <input id="upload" name="upload[]" type="file" multiple="multiple" accept="image/*" />
