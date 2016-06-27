@@ -1,1 +1,1 @@
-##This is a experimental version. It works but I need to clean up the code. I'll also have to test it.. A lot.. 
+##This is a experimental version. Only the standalone script works. I need to still work on the WordPress plugin script.
