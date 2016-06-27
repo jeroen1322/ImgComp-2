@@ -1,3 +1,22 @@
+<?php
+    //Delete all the files from the uploads/ folder after the download.
+    $del = glob('./uploads/*'); //Get all the files from uploads/
+    //Loop through all the files and unlink (delete) them
+    foreach ($del as $d) {
+        if (is_file($d)) {
+            unlink($d);
+        }
+    }
+
+    if(isset($_POST['abc'])){
+        $filePath = 'gecomrimeerd.zip';
+        header('Content-type: octet/stream');
+        header('Content-disposition: attachment; filename=' . $shortname . ';');
+        header('Content-Length: ' . filesize($filePath));
+        readfile($filePath);
+    }
+?>
+
 <html>
     <head>
         <title>Comprimeer website foto's</title>
@@ -60,7 +79,7 @@ require __DIR__ . '/resources/functions.php';
 //WEBSITE: http://www.jeroengrooten.nl
 //NAME: ImgComp - Compression file. 
 if (isset($_POST['submit'])) {
-    
+
     if (count($_FILES['upload']['name']) > 0) {
         //Loop through each file
         for ($i = 0; $i < count($_FILES['upload']['name']); $i++) {
@@ -203,7 +222,6 @@ if (isset($_POST['submit'])) {
     //After the download the .zip will be deleted.
     //If there is just one file uploaded and processed, use a HTTP request to download that one file.
     download($total, $filePath, $shortname, $files);
-    
 }
 
 ?>

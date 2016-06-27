@@ -129,19 +129,18 @@
             }
 
             $zip->close(); //Close the zip procedure
-
-
-         /*   //Download the .zip file
+            
+            echo '<div id="download"><form method="post"><input type="submit" name="abc" value="Download foto\'s"></div>';
+/*            //Download the .zip file
             header('Content-Type: application/zip');
             header('Content-disposition: attachment; filename=' . $filename);
             header('Content-Length: ' . filesize($filename));
             readfile($filename);
-            unlink($filename);*/
+            unlink($filename);
     
-            echo "<br><br><br><div id='download'><a href='gecomprimeerd.zip' download='gecomprimeerd.zip'><button name='download' type='submit'>Download foto's</button></a></div>";
             
             //Delete all the files from the uploads/ folder after the download.
-/*            $del = glob('uploads/*'); //Get all the files from uploads/
+            $del = glob('uploads/*'); //Get all the files from uploads/
             //Loop through all the files and unlink (delete) them
             foreach ($del as $d) {
                 if (is_file($d)) {
@@ -158,8 +157,8 @@
                 header('Content-disposition: attachment; filename=' . $shortname . ';');
                 header('Content-Length: ' . filesize($filePath));
                 readfile($filePath);*/
-                echo "<br><br><br><div id='download'><a href='$filePath' download='$filePath'><button type='button'>Download foto</button></div>";
-                
+                echo "<div id='download'><a href='$filePath' download='$shortname''><button>Download foto</button></a></div>";
+
             } else {
                 echo "<div id='error'><span id='closebtn'>&times;</span>ERROR: Selecteer alstublieft een foto.</div>";
             }
