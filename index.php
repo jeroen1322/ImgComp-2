@@ -1,8 +1,17 @@
 <html>
     <head>
         <title>Comprimeer website foto's</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script src="js/js.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+        <script src="resources/js/js.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#download").click(function(){
+                    $("#download").hide();
+                });
+            });
+        </script>
+
     </head>
     
     <body>
@@ -33,12 +42,13 @@
             <p><input type="submit" name="submit" value="Verstuur" onclick="myFunction()"></p>
         </form>
         <div id="help">
-            <img src="Images/question-mark.png" />
+            <img src="resources/Images/question-mark.png" />
             <div id="help_hidden"><p>Het kan enkele minuten duren om het bestand te uploaden, aanpassen en downloaden. Het kan zijn dat de pagina niet veranderd, maar de download start automatisch.</p></div>
         </div>
     </body>
     
 </html>
+
 <?php
 require __DIR__ . '/resources/functions.php';
 //AUTHOR: Jeroen Grooten
