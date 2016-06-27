@@ -57,7 +57,7 @@
 
                 //Check if an image is CMYK. If it is, echo an error, delete uploaded files and die();
                 if($short['channels'] == 4){
-                    echo "Uw foto is CMYK (Fullcolor) en wordt niet ondersteund. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.";
+                    echo "<div id='error'><span id='closebtn'>&times;</span>Uw foto is CMYK (Fullcolor) en wordt niet ondersteund. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.</div>";
 
                     //Delete all the files from the uploads/ folder
                     $del = glob('uploads/*'); //Get all the files from uploads/
@@ -102,7 +102,7 @@
         $image[17] = chr($dpi_y % 255);
         
         // Write the new JPG
-        $f = fopen($comped, 'w') or die("<br>ERROR: Er is een fout geweest tijdens het verwerken van uw bestand. Probeer het alstublieft opnieuw.");
+        $f = fopen($comped, 'w') or die("<div id='error'><span id='closebtn'>&times;</span>ERROR: Er is een fout geweest tijdens het verwerken van uw bestand. Probeer het alstublieft opnieuw.</div>");
         fwrite($f, $image, $size);
         fclose($f);
     }
@@ -138,8 +138,8 @@
             readfile($filename);
             unlink($filename);*/
     
-            echo "<div class='download'><a href='gecomprimeerd.zip' download='gecomprimeerd.zip'>Download foto's</a></div>";
-
+            echo "<br><br><br><div id='download'><a href='gecomprimeerd.zip' download='gecomprimeerd.zip'><button name='download' type='submit'>Download foto's</button></a></div>";
+            
             //Delete all the files from the uploads/ folder after the download.
 /*            $del = glob('uploads/*'); //Get all the files from uploads/
             //Loop through all the files and unlink (delete) them
@@ -158,10 +158,10 @@
                 header('Content-disposition: attachment; filename=' . $shortname . ';');
                 header('Content-Length: ' . filesize($filePath));
                 readfile($filePath);*/
-                echo "<div class='download><a href='$filePath' download='$shortname'>Download</a></div>";
+                echo "<br><br><br><div id='download'><a href='$filePath' download='$filePath'><button type='button'>Download foto</button></div>";
                 
             } else {
-                echo "<br>ERROR: Selecteer alstublieft een foto.";
+                echo "<div id='error'><span id='closebtn'>&times;</span>ERROR: Selecteer alstublieft een foto.</div>";
             }
 
             //Delete all the files from the uploads/ folder after the download.
@@ -174,4 +174,3 @@
             }*/
         }
     }
-
