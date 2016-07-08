@@ -58,7 +58,7 @@ If there are more then one image uploaded and processed, the files will be put i
 
 
 ###Issues:
-- Bad, if all, CMYK to RGB conversion. 
+- ~~Bad, if all, CMYK to RGB conversion.~~ [SOLVED? The new version checks and blocks CMYK]   
 - ~~No JPEG support. Now there is only JPG & PNG support. Should be easy fix.~~ [SOLVED]
 
 ###TODO:
