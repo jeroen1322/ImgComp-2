@@ -1,5 +1,7 @@
 <?php
 
+require_once(__dir__ . '/../definitions.php');
+
     //----FUNCTION TO RESIZE THE IMAGES----//
     function ak_img_resize($arr, $w, $h, $ext2, $shortname)
     {
@@ -52,15 +54,15 @@
             case "jpg":
                 
                 //Get file name and image information
-                $short = "uploads/".$shortname;
+                $short = UPLOAD_DIR . "/" . $shortname;
                 $short = getimagesize($short);
 
                 //Check if an image is CMYK. If it is, echo an error, delete uploaded files and die();
                 if($short['channels'] == 4){
-                    echo "<div id='error'><span id='closebtn'>&times;</span>Uw foto is CMYK (Fullcolor) en wordt niet ondersteund. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.</div>";
+                    echo '<div id="error"><span id="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>Uw foto is CMYK (Fullcolor) en wordt niet ondersteund. <br> Converteer alstublieft eerst de foto naar RGB en probeer het daarna opnieuw.</div>';
 
                     //Delete all the files from the uploads/ folder
-                    $del = glob('uploads/*'); //Get all the files from uploads/
+                    $del = glob(UPLOAD_DIR . '/*'); //Get all the files from uploads/
 
                     //Loop through all the files and unlink (delete) them
                     foreach ($del as $d) {
@@ -102,11 +104,14 @@
         $image[17] = chr($dpi_y % 255);
         
         // Write the new JPG
-        $f = fopen($comped, 'w') or die("<div id='error'><span id='closebtn'>&times;</span>ERROR: Er is een fout geweest tijdens het verwerken van uw bestand. Probeer het alstublieft opnieuw.</div>");
+        $f = fopen($comped, 'w') or die('<div id="error"><span id="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>ERROR: Er is een fout geweest tijdens het verwerken van uw bestand. Probeer het alstublieft opnieuw.</div>');
         fwrite($f, $image, $size);
         fclose($f);
     }
     //----END DPI CHANGE FUNCTION----//
+
+
+
 
     //If there are more than 1 file uploaded and processed, create and put them in a .zip file and download it.
     //After the download the .zip will be deleted.
@@ -125,11 +130,16 @@
 
             //Loop through each image and add them to the .zip
             foreach ($files as $i) {
-                $zip->addFile('uploads/' . $i, $i);
+                if(file_exists(UPLOAD_DIR . '/' . $i)){
+                    $fileToAdd = UPLOAD_DIR . '/' . $i;
+                    $zip->addFile($fileToAdd, $i);
+                } else {
+                    echo "Er is iets fout gegaan. Probeer het A.U.B overnieuw.";
+                }
             }
 
             $zip->close(); //Close the zip procedure
-
+            rename("$filename", '../wp-content/plugins/ImgComp/'.$filename);
 
          /*   //Download the .zip file
             header('Content-Type: application/zip');
@@ -138,10 +148,10 @@
             readfile($filename);
             unlink($filename);*/
     
-            echo "<br><br><br><div id='download'><a href='gecomprimeerd.zip' download='gecomprimeerd.zip'><button name='download' type='submit'>Download foto's</button></a></div>";
+            echo '<div id="download"><a href="/wp-content/plugins/ImgComp/gecomprimeerd.zip"><button>Download foto\'s</button></a><div>';
             
             //Delete all the files from the uploads/ folder after the download.
-/*            $del = glob('uploads/*'); //Get all the files from uploads/
+/*            $del = glob(UPLOAD_DIR . '/*'); //Get all the files from uploads/
             //Loop through all the files and unlink (delete) them
             foreach ($del as $d) {
                 if (is_file($d)) {
@@ -158,14 +168,15 @@
                 header('Content-disposition: attachment; filename=' . $shortname . ';');
                 header('Content-Length: ' . filesize($filePath));
                 readfile($filePath);*/
-                echo "<br><br><br><div id='download'><a href='$filePath' download='$filePath'><button type='button'>Download foto</button></div>";
+                echo $shortname;
+                echo "<div id='download'><a href='" . DOWNLOAD_PATH . "/{$shortname}' download='{$shortname}'><button type='button'>Download foto</button></div>";
                 
             } else {
                 echo "<div id='error'><span id='closebtn'>&times;</span>ERROR: Selecteer alstublieft een foto.</div>";
             }
 
             //Delete all the files from the uploads/ folder after the download.
-/*            $del = glob('uploads/*'); //Get all the files from uploads/
+/*            $del = glob(UPLOAD_DIR . '/*'); //Get all the files from uploads/
             //Loop through all the files and unlink (delete) them
             foreach ($del as $d) {
                 if (is_file($d)) {

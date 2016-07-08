@@ -1,0 +1,72 @@
+
+#letop{
+    max-width: 500px;
+    border: 1px solid #bbbbbb;
+     -moz-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+    -webkit-box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+}
+
+#letop p{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#help img{
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-top: 10px;
+}
+
+#help_hidden{
+    max-width: 200px;
+    max-height: 200px;
+    margin-top: 10px;
+    margin-left: 50px;
+    display: none;
+    background-color: #DEDEDE;
+    border: 1.5px dashed black;
+    border-radius: 5px;
+}
+
+#help_hidden p{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#help:hover #help_hidden{
+    display: block;
+}
+
+/* The alert message box */
+#error {
+    margin-top: 75px;
+    max-width: 460px;
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* The close button */
+#closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+#closebtn:hover {
+    color: black;
+}
+
+#download{
+    position: relative;
+    margin-top: 75px;
+}

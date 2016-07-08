@@ -1,8 +1,27 @@
+<?php
+    $del = glob('uploads/*'); //Get all the files from uploads/
+    //Loop through all the files and unlink (delete) them
+    foreach ($del as $d) {
+        if (is_file($d)) {
+            unlink($d);
+        }
+    }
+
+    if(isset($_POST['downloadzip'])){
+        $filename = 'gecomprimeerd.zip';
+        header('Content-Type: application/zip');
+        header('Content-disposition: attachment; filename=' . $filename);
+        header('Content-Length: ' . filesize($filename));
+        readfile($filename);
+        unlink($filename);
+    }
+
+?>
 <html>
     <head>
         <title>Comprimeer website foto's</title>
-        <link rel="stylesheet" type="text/css" href="resources/css/style.css">
-        <script src="resources/js/js.js"></script>
+        <link rel="stylesheet" type="text/css" href="./resources/css/style.css">
+        <script src="./resources/js/js.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
@@ -10,8 +29,18 @@
                     $("#download").hide();
                 });
             });
+            
+            $(document).ready(function(){
+                $("#submit").click(function(){
+                    $("#download_text").show();
+                });
+            });
         </script>
-
+        <script>
+            function hide(){
+                this.parentElement.style.display='none';
+            }
+        </script>
     </head>
     
     <body>
@@ -39,10 +68,10 @@
                 </div>
             </div>
 
-            <p><input type="submit" name="submit" value="Verstuur" onclick="myFunction()"></p>
+            <p><input type="submit" name="submit" value="Verstuur" onclick="myFunction()" id="submit"></p>
         </form>
         <div id="help">
-            <img src="resources/Images/question-mark.png" />
+            <img src="./resources/Images/question-mark.png" />
             <div id="help_hidden"><p>Het kan enkele minuten duren om het bestand te uploaden, aanpassen en downloaden. Het kan zijn dat de pagina niet veranderd, maar de download start automatisch.</p></div>
         </div>
     </body>
@@ -69,7 +98,7 @@ if (isset($_POST['submit'])) {
             //Check if the uploaded file is actually a image. 
             //If not, stop the script and display an error. 
             if (!preg_match("/.(jpg|png)$/i", $_FILES['upload']['name'][$i])){
-                echo "ERROR: Selecteer alstublieft een correct foto bestand.";
+                echo '<div id="error"><span id="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>ERROR: Selecteer alstublieft een correct foto bestand.</div>';
                 die();
             } else {
                 //Make sure we have a filepath
@@ -89,7 +118,7 @@ if (isset($_POST['submit'])) {
                         //use $filePath for the relative url to the file
                     }
                 } else {
-                    echo "<br>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw.";
+                    echo '<div id="error"><span id="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>ERROR: Er was een probleem tijdens het uploaded van uw bestand. Probeer het later opnieuw.</div>';
                     die();
                 }
             }
@@ -133,7 +162,7 @@ if (isset($_POST['submit'])) {
                 $w = $wijd;
                 $h = $hoog;
             } else {
-                echo "<br>ERROR: Voer alstublieft de hoogte en breedte voor de foto's in";
+                echo '<div id="error"><span id="closebtn" onclick="this.parentElement.style.display=\'none\';">&times;</span>ERROR: Voer alstublieft de hoogte en breedte voor de foto\'s in</div>';
                 
                 //Delete all the files from the uploads/ folder after the download.
                 $del = glob('uploads/*'); //Get all the files from uploads/
