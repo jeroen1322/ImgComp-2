@@ -65,7 +65,7 @@ function compress_main_page(){
         <h1><br>Websitefoto's comprimeren</h1>
         <div id="letop">
             <p><b>LET OP:</b> is de bestandnaam van de foto goed?</p>
-            <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appeltaart.jpg</i> heben.</p>
+            <p>De bestandsnaam moet een foto omschrijving zijn of zoekterm in geval van SEO <br>Bijvoorbeeld een foto van een appeltaart moet de bestandsnaam <i>appeltaart.jpg</i> hebben.</p>
         </div>
             
         <form action="" enctype="multipart/form-data" method="post">
